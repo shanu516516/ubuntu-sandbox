@@ -1,0 +1,46 @@
+services:
+  ubuntu:
+    build: .
+    container_name: ubuntu-sandbox
+    hostname: sandbox
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    working_dir: /home/ubuntu
+    volumes:
+      - ./data/ubuntu:/home/ubuntu
+      - ./data/root:/root
+    environment:
+      - DEBIAN_FRONTEND=noninteractive
+      - ROOT_PASSWORD=${ROOT_PASSWORD:-root123}
+      - UBUNTU_PASSWORD=${UBUNTU_PASSWORD:-ubuntu123}
+
+    # --- Security hardening ---
+    privileged: false
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - DAC_OVERRIDE
+      - FOWNER
+      - SETGID
+      - SETUID
+      - NET_RAW
+      - SYS_PTRACE
+    security_opt:
+      - no-new-privileges:false
+    read_only: false
+    tmpfs:
+      - /tmp
+      - /run
+    pids_limit: 512
+    mem_limit: 4g
+    cpus: 4
+
+    networks:
+      - sandbox_net
+
+networks:
+  sandbox_net:
+    driver: bridge
+    internal: false
