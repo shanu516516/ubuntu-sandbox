@@ -15,4 +15,11 @@ chmod 700 /home/ubuntu
 chown -R root:root /root
 chmod 700 /root
 
+if [ "$ENABLE_SSH" = "true" ]; then
+  mkdir -p /run/sshd
+  ssh-keygen -A
+  echo "Starting SSH server on port 22..."
+  /usr/sbin/sshd
+fi
+
 exec su - ubuntu -c "$*"

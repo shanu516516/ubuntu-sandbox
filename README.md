@@ -110,12 +110,29 @@ sudo rm -rf ./data
 docker compose logs -f ubuntu
 ```
 
-## VSCode Integration
+## IDE Integration (VSCode / Cursor)
 
-1. Install the **Dev Containers** extension in VSCode
+### Option 1: Dev Containers (no SSH needed)
+
+1. Install the **Dev Containers** extension
 2. Start the container with `docker compose up -d`
-3. Open command palette → **Dev Containers: Attach to Running Container** → select `ubuntu-sandbox`
-4. You'll get a full VSCode window running inside the container at `/home/ubuntu`
+3. Open command palette (`Cmd+Shift+P`) → **Dev Containers: Attach to Running Container** → select `ubuntu-sandbox`
+4. You'll get a full IDE window running inside the container at `/home/ubuntu`
+
+### Option 2: Remote SSH
+
+1. Enable SSH in your `.env` file:
+
+```
+ENABLE_SSH=true
+SSH_PORT=2222
+```
+
+2. Rebuild: `docker compose up -d --build`
+3. Install the **Remote - SSH** extension
+4. Connect to `ssh ubuntu@localhost -p 2222`
+
+SSH is disabled by default. Set `ENABLE_SSH=true` in `.env` to enable it.
 
 ## File Structure
 

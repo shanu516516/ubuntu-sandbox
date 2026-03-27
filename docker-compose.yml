@@ -14,6 +14,9 @@ services:
       - DEBIAN_FRONTEND=noninteractive
       - ROOT_PASSWORD=${ROOT_PASSWORD:-root123}
       - UBUNTU_PASSWORD=${UBUNTU_PASSWORD:-ubuntu123}
+      - ENABLE_SSH=${ENABLE_SSH:-false}
+    ports:
+      - "${SSH_PORT:-2222}:22"
 
     # --- Security hardening ---
     privileged: false
@@ -26,6 +29,7 @@ services:
       - SETGID
       - SETUID
       - NET_RAW
+      - SYS_CHROOT
       - SYS_PTRACE
     security_opt:
       - no-new-privileges:false
