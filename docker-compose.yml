@@ -16,7 +16,7 @@ services:
       - UBUNTU_PASSWORD=${UBUNTU_PASSWORD:-ubuntu123}
       - ENABLE_SSH=${ENABLE_SSH:-false}
     ports:
-      - "${SSH_PORT:-2222}:22"
+      - "${SSH_HOST:-127.0.0.1}:${SSH_PORT:-2222}:22"
 
     # --- Security hardening ---
     privileged: false
