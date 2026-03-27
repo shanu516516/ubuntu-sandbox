@@ -11,7 +11,9 @@ RUN apt-get update && \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN useradd -m -s /bin/bash -G sudo -u 1100 ubuntu
+RUN usermod -u 1100 -s /bin/bash -aG sudo ubuntu && \
+    mkdir -p /home/ubuntu && \
+    chown -R ubuntu:ubuntu /home/ubuntu
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
