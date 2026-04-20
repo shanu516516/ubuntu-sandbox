@@ -10,11 +10,16 @@ services:
     volumes:
       - ./data/ubuntu:/home/ubuntu
       - ./data/root:/root
+      # - ./data:/
     environment:
       - DEBIAN_FRONTEND=noninteractive
       - ROOT_PASSWORD=${ROOT_PASSWORD:-root123}
       - UBUNTU_PASSWORD=${UBUNTU_PASSWORD:-ubuntu123}
       - ENABLE_SSH=${ENABLE_SSH:-false}
+      - INSTALL_NODE=${INSTALL_NODE:-false}
+      - INSTALL_PNPM=${INSTALL_PNPM:-false}
+      - INSTALL_RUST=${INSTALL_RUST:-false}
+      - INSTALL_GO=${INSTALL_GO:-false}
     ports:
       - "${SSH_HOST:-127.0.0.1}:${SSH_PORT:-2222}:22"
 

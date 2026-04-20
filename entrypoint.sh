@@ -15,6 +15,8 @@ chmod 700 /home/ubuntu
 chown -R root:root /root
 chmod 700 /root
 
+/install-tools.sh
+
 if [ "$ENABLE_SSH" = "true" ]; then
   mkdir -p /run/sshd
   ssh-keygen -A

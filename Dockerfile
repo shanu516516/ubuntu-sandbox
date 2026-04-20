@@ -18,7 +18,8 @@ RUN usermod -u 1100 -s /bin/bash -aG sudo ubuntu && \
     chown -R ubuntu:ubuntu /home/ubuntu
 
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY install-tools.sh /install-tools.sh
+RUN chmod +x /entrypoint.sh /install-tools.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bash"]
