@@ -10,16 +10,19 @@ services:
     volumes:
       - ./data/ubuntu:/home/ubuntu
       - ./data/root:/root
+      - ./data/workspace:/workspace
+      - ./data/ssh:/etc/ssh
+      - cargo-registry:/usr/local/cargo/registry
+      - cargo-git:/usr/local/cargo/git
+      - go-mod-cache:/go/pkg/mod
+      - pnpm-store:/home/ubuntu/.local/share/pnpm/store
       # - ./data:/
     environment:
       - DEBIAN_FRONTEND=noninteractive
       - ROOT_PASSWORD=${ROOT_PASSWORD:-root123}
       - UBUNTU_PASSWORD=${UBUNTU_PASSWORD:-ubuntu123}
       - ENABLE_SSH=${ENABLE_SSH:-false}
-      - INSTALL_NODE=${INSTALL_NODE:-false}
-      - INSTALL_PNPM=${INSTALL_PNPM:-false}
-      - INSTALL_RUST=${INSTALL_RUST:-false}
-      - INSTALL_GO=${INSTALL_GO:-false}
+      - UBUNTU_NOPASSWD_SUDO=${UBUNTU_NOPASSWD_SUDO:-false}
     ports:
       - "${SSH_HOST:-127.0.0.1}:${SSH_PORT:-2222}:22"
 
@@ -53,3 +56,9 @@ networks:
   sandbox_net:
     driver: bridge
     internal: false
+
+volumes:
+  cargo-registry:
+  cargo-git:
+  go-mod-cache:
+  pnpm-store:
