@@ -44,6 +44,7 @@ All tools below are baked into the image at **build time** — no runtime instal
 |---|---|---|
 | Node.js (LTS) + npm | `/usr/bin` (via NodeSource) | |
 | pnpm | global npm install | Store at `/home/ubuntu/.local/share/pnpm/store` (named volume) |
+| Claude Code | global npm install | Session history, plans, memory, and auth tokens live under `~/.claude` — persisted automatically via the `/home/ubuntu` bind mount |
 | Go (latest stable) | `/usr/local/go` | `GOPATH=/go`, `GOMODCACHE=/go/pkg/mod` (named volume) |
 | Rust (stable, via rustup) | `/usr/local/cargo`, `/usr/local/rustup` | Registry + git cache on named volumes |
 

@@ -17,10 +17,10 @@ RUN apt-get update && \
     && mkdir -p /run/sshd \
     && cp -a /etc/ssh /etc/ssh.dist
 
-# Node.js (LTS) + pnpm
+# Node.js (LTS) + pnpm + Claude Code
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
     apt-get install -y nodejs && \
-    npm install -g pnpm && \
+    npm install -g pnpm @anthropic-ai/claude-code && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Go (latest stable) -> /usr/local/go
